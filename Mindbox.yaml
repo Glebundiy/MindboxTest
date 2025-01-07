@@ -28,13 +28,13 @@ spec:
           httpGet:
             path: /health # URL для проверки готовности
             port: 8080 # Порт, на котором работает приложение
-          initialDelaySeconds: 5 # Задержка перед первой проверкой (время инициализации)
+          initialDelaySeconds: 10 # Задержка перед первой проверкой (время инициализации)
           periodSeconds: 10 # Частота проверок
         livenessProbe: # Проверка, что приложение продолжает работать
           httpGet:
             path: /health # URL для проверки
             port: 8080 # Порт проверки
-          initialDelaySeconds: 10 # Задержка перед проверкой
+          initialDelaySeconds: 15 # Задержка перед проверкой
           periodSeconds: 30 # Частота проверок
       affinity: # Правила распределения подов по нодам
         podAntiAffinity: # Антиаффинность: предотвращает запуск подов на одной ноде
