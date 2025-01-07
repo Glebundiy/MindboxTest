@@ -1,23 +1,22 @@
-# Deployment: Определяет, как будет развернуто приложение в Kubernetes.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mindboxtest-deployment # Название Deployment для идентификации
+  name: mindboxtest-deployment # Deployment в названии для идентификации
   labels:
-    app: mindboxtest # Метка, которая будет использоваться для подов
+    app: mindboxtest # Имя, которое будет использоваться для подов
 spec:
-  replicas: 1 # Минимальное количество подов (1 под ночью для экономии ресурсов)
+  replicas: 1 # Минимальное количество подов
   selector:
     matchLabels:
       app: mindboxtest # Связь между подами и этим Deployment
   template: # Шаблон для создания подов
     metadata:
       labels:
-        app: mindboxtest # Метка для подов, чтобы они могли быть найдены сервисами
+        app: mindboxtest # Имя подов, чтобы они могли быть найдены сервисами
     spec:
       containers:
       - name: mindboxtest-container # Имя контейнера, внутри пода
-        image: my-web-app:latest # Docker-образ приложения (замените на актуальный образ)
+        image: my-web-app:latest # Docker-образ приложения
         resources: # Определение запросов и лимитов на ресурсы
           requests:
             memory: "128Mi" # Минимальная память, необходимая приложению
