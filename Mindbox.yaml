@@ -38,16 +38,15 @@ spec:
           periodSeconds: 30 # Частота проверок
       affinity: # Правила распределения подов по нодам
         podAntiAffinity: # Антиаффинность: предотвращает запуск подов на одной ноде
-          requiredDuringSchedulingIgnoredDuringExecution:
+          requiredDuringSchedulingIgnoredDuringExecution:  # строгая политика, которая обязательно применяется во время планирования и игнорируется после запуска.
           - labelSelector:
               matchExpressions:
               - key: app
-                operator: In
+                operator: In # Это означает, что метка должна содержать одно из указанных значений
                 values:
                 - mindboxtest # Указывает, что поды с этой меткой не должны быть на одной ноде
-            topologyKey: kubernetes.io/hostname # Гарантирует, что поды будут на разных нодах
-      tolerations:
-      - key: "node-role.kubernetes.io"
+            topologyKey: kubernetes.io/hostname # Означает, что поды должны размещаться на разных нодах (определяется по имени ноды)
+      - key: "node-role.kubernetes.io/worker"
         operator: "Exists"
         effect: "NoSchedule" # Разрешает размещение на рабочих нодах
 ---
